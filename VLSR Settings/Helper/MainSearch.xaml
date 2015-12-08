@@ -1,0 +1,125 @@
+﻿<Window x:Class="BondTech.Vienna.Settings.MainSearch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:BondTech.Vienna.Settings"
+        xmlns:EB="clr-namespace:Microsoft.WindowsAPICodePack.Controls.WindowsPresentationFoundation;assembly=Microsoft.WindowsAPICodePack.Shell"
+        Title="Search App" Height="670" Width="796.25"
+	    SizeToContent="WidthAndHeight"
+        Closed="Window_Closed"
+        WindowStartupLocation="CenterScreen" Name="Window1" Icon="/Vienna%20Logon%20Screen%20Rotator;component/Images/Find_Search.ico">
+    <Window.InputBindings>
+        <KeyBinding Gesture="Control+E" Command="l:CustomCommands.SearchCommand"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="l:CustomCommands.SearchCommand" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="Themes/GlassButton.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="DocumentRoot" Width="700" Height="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="87" />
+            <RowDefinition Height="513" />
+        </Grid.RowDefinitions>
+        <Image HorizontalAlignment="Left" Name="image1" 
+               Stretch="Fill" 
+               Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/JPEG.png" Width="64" Height="64" Margin="9,2.727,0,4.273" />
+        <Label Name="label1" FontStyle="Normal" FontSize="25" FontWeight="Bold" FontFamily="Segoe Script" Margin="81,14,0,28" HorizontalAlignment="Left" Width="262" Content="VLSR JPEG finder."></Label>
+
+        <l:SearchTextBox x:Name="SearchBox" SearchMode="Delayed" SearchEventTimeDelay="00:00:01" Margin="349,9,172,0" Search="SearchTextBox_Search" Height="21.543" VerticalAlignment="Top" />
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <ListView Name="listView1" Height="388">
+                <ListView.View>
+                    <l:ImageView />
+                </ListView.View>
+            </ListView>
+
+            <WrapPanel Height="100" Width="702" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+
+                <StackPanel Orientation="Horizontal" Width="332">
+                    <Label Content="Authors: " HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" FontWeight="Bold" />
+                    <ListBox Width="180" 
+                             ItemsSource="{Binding ElementName=listView1, Path=SelectedItem.Authors}" 
+                             BorderThickness="0" 
+                             VerticalContentAlignment="Center" 
+                             Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="40,0,0,0">
+                    <Label Content="Rating: " HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" FontWeight="Bold" />
+                    <l:RatingControl Width="87" 
+                                         Height="15" 
+                                         RatingValue="{Binding ElementName=listView1, Path=SelectedItem.Rating, Mode=OneWay}" 
+                                         />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Width="332">
+                    <Label Content="Title: " HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" FontWeight="Bold" />
+                    <TextBlock Width="202" 
+                             IsEnabled="True"
+                             Text="{Binding ElementName=listView1, Path=SelectedItem.Title, Mode=OneWay}"
+                             Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="40,0,0,0">
+                    <Label Width="125" Content="Copyright: " VerticalAlignment="Center" FontWeight="Bold" />
+                    <TextBlock Width="180" 
+                             Text="{Binding ElementName=listView1, Path=SelectedItem.Copyright, Mode=OneWay}" 
+                             Height="26" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="332">
+                    <Label Width="125" Content="Keywords: " VerticalAlignment="Center" FontWeight="Bold" />
+                    <ListBox Width="180"
+                             ItemsSource="{Binding ElementName=listView1, Path=SelectedItem.Keywords, Mode=OneWay}"
+                             BorderThickness="0" 
+                             VerticalContentAlignment="Center" 
+                             Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="40,0,0,0">
+                    <Label Width="125" Content="File Owner: " VerticalAlignment="Center" FontWeight="Bold" />
+                    <TextBlock Width="180" 
+                             Text="{Binding ElementName=listView1, Path=SelectedItem.FileType, Mode=OneWay}" 
+                             Height="26" IsEnabled="True"/>
+                </StackPanel>
+
+            </WrapPanel>
+
+
+        </StackPanel>
+        <Button Click="buttonSearchAdv_Click" HorizontalAlignment="Right" Margin="0,8,45,45" Name="buttonSearchAdv" Width="108">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/search_adv.png" Width="32"/>
+                <Label FontSize="12">Advanced...</Label>
+                <Thumb Opacity="0" Background="{x:Null}" x:Name="DragThumb" />
+            </StackPanel>
+        </Button>
+        <ComboBox Margin="0,39,28,8" Name="buttonExportAll" VerticalContentAlignment="Top" HorizontalAlignment="Right">
+            <ComboBoxItem  IsSelected="True">
+                <Button Click="buttonExportAll_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="12">Export all items.</Label>
+                    </StackPanel>
+                </Button>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <Button Click="buttonExportSelected_Click">
+                    <Label FontSize="12">Export selected</Label>
+                </Button>
+            </ComboBoxItem>
+        </ComboBox>
+        <Button Name="HelpButton" Click="HelpButton_Click" Width="30" HorizontalAlignment="Right" Margin="0,9,12,48">
+            <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Help-32.png" />
+        </Button>
+        <ComboBox Height="40" Margin="349,0,172,7.773" Name="SearchScopesCombo" VerticalAlignment="Bottom" />
+
+        <Label Height="28" Margin="261,0,0,12.273" Name="label2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="86">Search Scope:</Label>
+    </Grid>
+</Window>

@@ -1,0 +1,766 @@
+﻿<Window x:Class="BondTech.Vienna.Settings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BondTech.Vienna.Settings" Title="MainWindow"
+        Icon="/Vienna%20Logon%20Screen%20Rotator;component/logo.ico" 
+        WindowStartupLocation="CenterScreen" Background="Black" 
+        Foreground="White" Closing="Window_Closing" mc:Ignorable="d" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" WindowStyle="None" Height="657" Width="629">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" CanExecute="CommandBinding_CanExecute" />
+    </Window.CommandBindings>
+    <!--xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml"-->
+    
+
+    <Grid>
+        <Grid Margin="0,0,0,279" Name="gridHeader">
+            <Image Height="98" HorizontalAlignment="Left" Name="imgLogoHeader" Stretch="Fill" VerticalAlignment="Top" Width="112" Source="/Vienna%20Logon%20Screen%20Rotator;component/logo.ico" />
+            <Label Content="Vienna Logon Screen Rotator." Height="43" Margin="118,6,166,0" Name="lblLogoHeader" VerticalAlignment="Top" Width="324" Foreground="White" FontFamily="Segoe Script" FontSize="20" FontWeight="Bold" />
+            <TextBlock Height="46" HorizontalAlignment="Stretch" Margin="118,52,158,0" Name="txtHeaderInfo" Text="Change your logon screen with ease." VerticalAlignment="Top" Width="332" TextWrapping="Wrap" />
+            <Image Height="40" HorizontalAlignment="Right" Margin="0,4,107,0" Name="imgWebsite" Stretch="Fill" VerticalAlignment="Top" Width="41" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/web.png" Cursor="Hand" />
+            <Image Height="40" HorizontalAlignment="Right" Margin="0,4,107,0" Name="imgWeb" Stretch="Fill" VerticalAlignment="Top" Width="41" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/website.png" Cursor="Hand" Opacity="0" MouseLeftButtonDown="imgWeb_MouseLeftButtonDown">
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard TargetName="imgWeb" TargetProperty="Opacity">
+                                <DoubleAnimation From="1" To="0" Duration="0:0:4"
+          AutoReverse="False" RepeatBehavior="1x"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard TargetName="imgWebsite" TargetProperty="Opacity">
+                                <DoubleAnimation From="1" To="0" Duration="0:0:4"
+          AutoReverse="True" RepeatBehavior="1x"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+            <Image Height="40" HorizontalAlignment="Right" Margin="0,4,58,0" Name="imgMinimize" Stretch="Fill" VerticalAlignment="Top" Width="43" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/minimize.png" />
+            <Image Height="40" HorizontalAlignment="Right" Margin="0,4,58,0" Name="imgMin" Stretch="Fill" VerticalAlignment="Top" Width="43" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/min.png" Opacity="0" MouseLeftButtonDown="imgMin_MouseLeftButtonDown">
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard TargetName="imgMin" TargetProperty="Opacity">
+                                <DoubleAnimation From="1" To="0" Duration="0:0:4"
+          AutoReverse="False" RepeatBehavior="1x"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard TargetName="imgMinimize" TargetProperty="Opacity">
+                                <DoubleAnimation From="1" To="0" Duration="0:0:4"
+          AutoReverse="True" RepeatBehavior="1x"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+            <Image Height="40" HorizontalAlignment="Right" Margin="555,4,0,0" Name="imgHeaderExit" Stretch="Fill" VerticalAlignment="Top" Width="52" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/close.png" />
+            <Image Height="40" HorizontalAlignment="Right" Margin="555,4,0,0" Name="imgHeaderClose" Stretch="Fill" VerticalAlignment="Top" Width="52" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/x.png" Opacity="0" MouseLeftButtonDown="imgHeaderClose_MouseLeftButtonDown">
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard TargetName="imgHeaderClose" TargetProperty="Opacity">
+                                <DoubleAnimation From="1" To="0" Duration="0:0:4"
+          AutoReverse="False" RepeatBehavior="1x"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard TargetName="imgHeaderExit" TargetProperty="Opacity">
+                                <DoubleAnimation From="1" To="0" Duration="0:0:4"
+          AutoReverse="True" RepeatBehavior="1x"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Grid>
+        <TabControl Margin="0,104,0,123" Name="tabMain" AllowDrop="True" Drop="tabMain_Drop">
+            <TabControl.BorderBrush>
+                <SolidColorBrush />
+            </TabControl.BorderBrush>
+            <TabItem Header="Home" Name="tabHome">
+                <Grid Name="gridHomeRoot">
+                    <StackPanel Margin="0,0,6,0" Height="359">
+                        <ListBox x:Name="lstImages" Height="246" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="lstImages_Drop" MouseRightButtonDown="lstImages_MouseRightButtonDown">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <!--<ListView.View>
+                                <local:ImageView />
+                            </ListView.View>-->
+                        </ListBox>
+                        <Popup x:Name="zoomPopup" MouseLeave="zoomPopup_MouseLeave" PlacementTarget="{Binding ElementName=zoomButton}" Placement="Center" StaysOpen="False" Height="115" Width="66">
+                            <Grid Background="White">
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Slider Margin="20" Orientation="Vertical" x:Name="zoomSlider" Value="3" Minimum="1" Maximum="10" Height="100" ValueChanged="zoomSlider_ValueChanged" />
+                                </Border>
+                            </Grid>
+                        </Popup>
+                    </StackPanel>
+                    <Button Height="91" HorizontalAlignment="Center" Margin="151,0,357,16" Name="btnFindFolder" VerticalAlignment="Bottom" Width="77" Style="{StaticResource Fancy}" Click="btnFindFolder_Click">
+                        <Image HorizontalAlignment="Left" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Search%20Folder.png" Height="88" Width="76" Margin="0" />
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Find Folder.</TextBlock>
+                                <TextBlock>Allows you pick a folder containing pictures.</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Height="91" HorizontalAlignment="Center" Margin="258,0,246,16" Name="btnFindFile" VerticalAlignment="Bottom" Width="81" Style="{StaticResource Fancy}" Click="btnFindFile_Click">
+                        <Image HorizontalAlignment="Left" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Search%20File.png" Height="88" Width="76" Margin="0" />
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Find file.</TextBlock>
+                                <TextBlock>Allows you select JPEG File(s) to use as your logon screen picture</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Height="91" HorizontalAlignment="Center" Margin="382,0,122,16" x:Name="zoomButton" VerticalAlignment="Bottom" Width="81" Style="{StaticResource Fancy}" Click="zoomButton_Click">
+                        <Image HorizontalAlignment="Left" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/zoom.gif" Height="88" Width="76" Margin="0" />
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Zoom.</TextBlock>
+                                <TextBlock>Allows you change the magnification of the list.</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Height="91" HorizontalAlignment="Center" Margin="479,0,0,16" Name="btnRefresh" VerticalAlignment="Bottom" Width="81" Style="{StaticResource Fancy}" Click="btnRefresh_Click">
+                        <Image HorizontalAlignment="Left" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/reset.ico" Height="88" Width="76" Margin="0" />
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Refresh.</TextBlock>
+                                <TextBlock>Shows you a list of available options.</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Height="91" HorizontalAlignment="Center" Margin="28,0,476,16" Name="btnAdvancedSearch" Style="{StaticResource Fancy}" VerticalAlignment="Bottom" Width="81" Click="btnAdvancedSearch_Click">
+                        <Image Height="88" HorizontalAlignment="Left" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Find_Search.ico" Width="76" />
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Advanced Search.</TextBlock>
+                                <TextBlock>Open the advanced search window to get JPEG files.</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings" Name="tabSettings">
+                <Grid OverridesDefaultStyle="True" Name="gridSettingsRoot" Height="364" Width="591">
+                    <Image Height="148" HorizontalAlignment="Left" Margin="2,2,0,0" Name="imgCurrentBG" Stretch="Fill" VerticalAlignment="Top" Width="213" Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/About.png" ToolTip="Your current background picture." />
+                    <TextBlock FontSize="18" FontWeight="Bold" FontFamily="Segoe Script" Height="38" HorizontalAlignment="Left" Margin="2,156,0,0" Name="txtServiceIsRunning" Text="Vienna Logon Screen Service is NOT running." VerticalAlignment="Top" Width="448" />
+                    <ToggleButton Content="_Start the Service" Height="29" HorizontalAlignment="Left" Margin="470,156,0,0" Name="btnServiceToggle" VerticalAlignment="Top" Width="109" Click="btnServiceToggle_Click" Checked="btnServiceToggle_Checked" Unchecked="btnServiceToggle_Unchecked">
+                        <ToggleButton.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Vienna Logon Service.</TextBlock>
+                                <TextBlock>Allows you start or pause Vienna Logon Service.<LineBreak />The service is monitors and changes your logon background as specified by your settings.</TextBlock>
+                            </StackPanel>
+                        </ToggleButton.ToolTip>
+                    </ToggleButton>
+                    <TextBlock FontSize="18" FontWeight="Bold" FontFamily="Segoe Script" Height="26" HorizontalAlignment="Left" Margin="221,2,0,0" Name="txtViennaEnabled" Text="VLSR is enabled." VerticalAlignment="Top" Width="168" />
+                    <ToggleButton Margin="464,6,9,336" Content="_Disable" IsChecked="True" Width="112" Name="btnDisableVienna" Checked="btnDisableVienna_Checked" Click="btnDisableVienna_Click" Unchecked="btnDisableVienna_Unchecked">
+                        <ToggleButton.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Disable or Enable VLSR</TextBlock>
+                                <TextBlock>Allows you disable or enable the program.<LineBreak />When disabled, VLSR will not change your logon background picture.</TextBlock>
+                            </StackPanel>
+                        </ToggleButton.ToolTip>
+                    </ToggleButton>
+                    <TextBlock FontFamily="Segoe Script" FontSize="18" FontWeight="Bold" Height="25" HorizontalAlignment="Left" Margin="3,244,0,0" Name="txtSubFolders" Text="VLSR will NOT include subfolders in search." VerticalAlignment="Top" Width="439" />
+                    <ToggleButton Content="Include Sub_Folders" Margin="467,246,12,92" Width="112" Name="btnSubFolderToggle" Checked="btnSubFolderToggle_Checked" Unchecked="btnSubFolderToggle_Unchecked">
+                        <ToggleButton.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Include or Exclude subfolders</TextBlock>
+                                <TextBlock>When enabled, VLSR will search subfolders when looking for files in folders, when you drag or paste folders in the list.</TextBlock>
+                            </StackPanel>
+                        </ToggleButton.ToolTip>
+                    </ToggleButton>
+                    <TextBlock FontFamily="Segoe Script" FontSize="18" FontWeight="Bold" Height="38" HorizontalAlignment="Left" Margin="6,285,0,0" Name="txtAppendFiles" Text="VLSR will clear list before adding new files." VerticalAlignment="Top" Width="439" />
+                    <ToggleButton Content="_Append" Margin="467,287,12,52" Width="112" Name="btnAppendToggle" IsChecked="True" Unchecked="btnAppendToggle_Unchecked" Checked="btnAppendToggle_Checked">
+                        <ToggleButton.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Append or Unappend.</TextBlock>
+                                <TextBlock>When set to Append, VLSR will keep the pictures currently in the list else, it will clear them before adding the new ones.</TextBlock>
+                            </StackPanel>
+                        </ToggleButton.ToolTip>
+                    </ToggleButton>
+                    <TextBlock FontFamily="Segoe Script" FontSize="18" FontWeight="Bold" Height="38" HorizontalAlignment="Left" Margin="6,326,0,0" Name="txtHowtoChange" Text="VLSR is picking files as arranged in the list." VerticalAlignment="Top" Width="448" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="467,328,0,0" Name="cboHowToChange" VerticalAlignment="Top" Width="112" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="cboHowToChange_SelectionChanged">
+                        <ComboBoxItem Content="Cycle" IsSelected="True" Name="cboHtCCycle">
+                            <ComboBoxItem.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Cycle.</TextBlock>
+                                    <TextBlock>Specifies that your logon screen background should be picked as arranged in the list.</TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.ToolTip>
+                        </ComboBoxItem>
+                        <ComboBoxItem Content="Random" Name="cboHtCRandom">
+                            <ComboBoxItem.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Random.</TextBlock>
+                                    <TextBlock>Specifies that your logon screen background should be picked at random.</TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.ToolTip>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock FontFamily="Segoe Script" FontSize="18" FontWeight="Bold" Height="38" HorizontalAlignment="Left" Margin="2,197,0,0" Name="textBlock6" Text="Change my Logon picture on Windows" VerticalAlignment="Top" Width="391" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="470,200,0,0" Name="cboWhenToChange" VerticalAlignment="Top" Width="109" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <ComboBoxItem Content="Startup" IsSelected="True">
+                            <ComboBoxItem.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Windows Start.</TextBlock>
+                                    <TextBlock>Specifies that your logon picture should be changed when you start your computer.</TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.ToolTip>
+                        </ComboBoxItem>
+                        <ComboBoxItem Content="Shutdown">
+                            <ComboBoxItem.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Windows Shutdown.</TextBlock>
+                                    <TextBlock>Specifies that your logon picture should be changed when you're about to shutdown down your computer.</TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.ToolTip>
+                        </ComboBoxItem>
+                        <ComboBoxItem Content="Lock">
+                            <ComboBoxItem.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Windows Lock.</TextBlock>
+                                    <TextBlock>Specifies that your logon picture should be changed whenever you lock your computer.</TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.ToolTip>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock FontFamily="Segoe Script" FontSize="18" FontWeight="Bold" Height="25" HorizontalAlignment="Left" Margin="221,46,0,0" Name="textBlock7" Text="VLSR Global Hotkey." VerticalAlignment="Top" Width="202" />
+                    <Label Height="30" HorizontalAlignment="Left" Margin="221,77,0,0" Name="lblGlobalShortcut" VerticalAlignment="Top" Width="202" Content="Shift +  Control +  Alt + V" FontWeight="Bold" />
+                    <Button Content="_Use Default" Margin="467,77,12,265" Width="112" Name="btnUseDefualtGlobalKey" Click="btnUseDefualtGlobalKey_Click">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Use default global shortcut.</TextBlock>
+                                <TextBlock>Changes VLSR to it's default global shortcut => CTRL + SHIFT + ALT + V.</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Content="_Change" Margin="467,50,12,292" Name="btnShortcutChange" Width="112" Click="btnShortcutChange_Click">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Change VLSR global shortcut.</TextBlock>
+                                <TextBlock>Allows you to specify you a shortcut to change your logon screen background.</TextBlock>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Help and About" Name="tabAbout">
+                <Grid Background="Black" TextBlock.Foreground="White" TextBlock.FontSize="30" Name="gridAboutRoot">
+                    <Grid.Resources>
+                        <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+                            <Setter Property="SnapsToDevicePixels" Value="True" />
+                            <Setter Property="OverridesDefaultStyle" Value="true" />
+                            <Setter Property="IsTabStop" Value="false" />
+                            <Setter Property="Focusable" Value="false" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                                        <Border Background="Transparent" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style x:Key="HorizontalScrollBarThumb" TargetType="{x:Type Thumb}">
+                            <Setter Property="SnapsToDevicePixels" Value="True" />
+                            <Setter Property="OverridesDefaultStyle" Value="true" />
+                            <Setter Property="IsTabStop" Value="false" />
+                            <Setter Property="Focusable" Value="false" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Thumb}">
+                                        <Grid Background="Transparent">
+                                            <Border Height="8" Background="#FFF" BorderThickness="0.5,1" CornerRadius="3" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style x:Key="VerticalScrollBarThumb" TargetType="{x:Type Thumb}">
+                            <Setter Property="SnapsToDevicePixels" Value="True" />
+                            <Setter Property="OverridesDefaultStyle" Value="true" />
+                            <Setter Property="IsTabStop" Value="false" />
+                            <Setter Property="Focusable" Value="false" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Thumb}">
+                                        <Grid Background="Transparent">
+                                            <Border Width="8" Background="#FFF" BorderThickness="1,0.5" CornerRadius="3" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+                            <Grid Width="8">
+                                <Border Width="8" Background="#18000000" CornerRadius="3" />
+                                <Track Name="PART_Track" IsDirectionReversed="true">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPageButton}" />
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb x:Name="Thumb" Opacity="0.25" Style="{StaticResource VerticalScrollBarThumb}" />
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPageButton}" />
+                                    </Track.IncreaseRepeatButton>
+                                </Track>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Opacity" To="1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Opacity" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                        <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+                            <Grid Height="8">
+                                <Border Height="8" Background="#18000000" CornerRadius="3" />
+                                <Track Name="PART_Track" IsDirectionReversed="false">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPageButton}" />
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb x:Name="Thumb" Opacity="0.25" Style="{StaticResource HorizontalScrollBarThumb}" />
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPageButton}" />
+                                    </Track.IncreaseRepeatButton>
+                                </Track>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Opacity" To="1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Opacity" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                        <Style TargetType="{x:Type ScrollBar}">
+                            <Setter Property="SnapsToDevicePixels" Value="True" />
+                            <Setter Property="OverridesDefaultStyle" Value="true" />
+                            <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
+                            <Style.Triggers>
+                                <Trigger Property="Orientation" Value="Horizontal">
+                                    <Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="{x:Type ScrollViewer}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid x:Name="Grid" Background="Transparent">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="0,0,4,0" CanHorizontallyScroll="False" CanVerticallyScroll="False" />
+                                            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="1" Grid.Row="0" Margin="0,4,4,4" AutomationProperties.AutomationId="VerticalScrollBar" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding Path=VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0" Name="title1" Margin="6,14,6,0" Height="43" Width="585" TextAlignment="Center">Vienna logon screen rotator ...</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0" Name="title2" Margin="6,14,6,0" Height="43" Width="585" TextAlignment="Center">allows you change your logon screen...</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0" Name="title3" Margin="8,14,6,0" Height="43" Width="583" TextAlignment="Center">picture with ease at every windows startup.</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0" Name="title4" Margin="8,8,6,0" Height="49" Width="583" TextAlignment="Center">Designed and developed by...</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0" Name="title5" Margin="8,8,6,0" Height="49" Width="583" TextAlignment="Center">Bond Technologies.</TextBlock>
+                    <Grid x:Name="MainPanel" Margin="11,63,1,0" Background="#0000">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <ScrollViewer Grid.Column="1" Margin="0,20">
+                            <TextBlock FontFamily="Georgia" FontSize="12pt" Foreground="#8FFF" LineHeight="18pt" TextWrapping="Wrap">
+        <TextBlock.Resources>
+          <Style x:Key="SectionTitle" TargetType="{x:Type Run}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14pt" />
+          </Style>
+        </TextBlock.Resources>
+        <Run FontSize="18pt" Foreground="White">
+        Welcome to Vienna logon Screen Rotator!
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        Vienna Logon Screen Rotator (henceforth referred to as VLSR) is a hobby and was created to be shared, so thanks for downloading!  First of all, this
+        is version 1 and I cannot argue that the previous version is lighter. So if you run into bugs, let me know and I'll try to fix them.  On the 
+        other hand, as a student, VLSR usually ends up last on my to-do list so turn around might be slow and support pretty minimal. Sorry, at least it's free.
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        Frequently Asked Questions.
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+           Here are some of the frequently asked questions to the problems you might run into.   
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        1. What's VLSR?
+        </Run>
+        <LineBreak />
+        <Run>
+        VLSR allows you change the default background picture that came
+            with Windows 7. I've always disliked (well, not entirely... just wanted to change it) the default logon picture that
+            came with windows 7 to a picture I preferred. I had to do it manually changing some registry keys and stuff. But I had to do this everytime I wanted to change it. VLSR is designed to automate this process and save time.
+            By the way, Windows 7 was first codenamed Vienna and I didn't want to name the program Windows 7 logon Screen Rotator hence the name Vienna.
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        2. My Picture is not added. 
+        </Run>
+        <LineBreak />
+        <Run>
+        Your picture has to meet some requirements (don't look at me I didn't do it, Microsoft
+            has hardcoded this into their OS.) Ok, so what are the requirements?</Run>
+                    <LineBreak />
+            <Run Foreground="Blue">a. Your picture has to less than 450kb. VLSR does not add pictures with the file size over 450kb</Run><LineBreak />
+            <Run Foreground="Blue">b. You picture has to be a JPEG file.</Run><LineBreak />
+            <Run Foreground="Blue">c. Okay, I added this to eliminate redundancy. VLSR will not add a picture that has already been added to the list. And I do mean
+            pictures with the same filepath.</Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        3. My Computer's logon screen is not changing.
+        </Run>
+        <LineBreak />           
+        <Run>
+               First, make sure you have not disabled VLSR. Check if you haven’t moved the folder you added pictures from or deleted any of the pictures you added.
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        4. Can it work on Other Microsoft OS?
+        </Run>
+        <LineBreak />
+        <Run>
+            Truth is ... I don’t know. I haven’t tested it on Microsoft Vista but NO, it won’t on Microsoft XP. I would, however, post on my Facebook page if I it works on Microsoft Vista.
+           <!--The application does not work on Microsoft XP operating system and other non-Microsoft Operating systems, it however works on Microsoft
+            Vista, however, this is not guaranteed. -->
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        So What's New?
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        I'm glad you asked. A lot has happened since the last version. Much of the app (most of the user interface) was rewritten and there's been 
+        some serious feature creep.  More importantly, there are a couple of features that you probably 
+        wouldn't discover on your own. (specifically, #4, #5, #6, #7 and #8).
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        1. Image List.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        The image list has been modified to show the pictures directly in a more convenient way with "cooler" tooltips which tells you the filename, size and creation date of the image.
+       
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        2. Append Files.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        You can now add new files without clearing the list. To achieve this in the previous version you'll have to copy and paste the picture to the folder you want to select. Now, all you need do is check the 'Append' button before finding or dropping files.
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        3. Search Sub Directories.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        This allows you search subdirectories of the selected folder. Check the 'Search Subdirectories' before finding files in folders. When you choose folders like 'Desktop' note that it may take a while before all the files in the subdirectories are found and added.
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        4. Multiple ways to add pictures.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        You can drag-drop files from Explorer to the Image List, or copy the file and paste it in the image list. You can also
+        right click the file from Explorer and select 'Vienna Logon Screen Rotator' in the 'Send to' context.</Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        5. Make selected image the current background.
+      
+  </Run>
+        <LineBreak />
+        <Run>
+        You can easily make a selected picture your logon screen picture by right clicking on a file from the image list and selecting make this my background.
+            You can also right click while pressing shift in Explore and change your Logon Screen. Note that: The image might change after restart as the program might've automatically changed the picture to another one.      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        6. Find in Explorer.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        You can easily find the selected image in explorer by simply right clicking on it and selecting find in explorer.
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        7. Remove image.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        You can now remove any image from the list by simply right clicking on it and selecting remove. The selected image is however not deleted from your drive. You should save to persist your settings.
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Foreground="White">
+        8. File Properties.
+      
+        </Run>
+        <LineBreak />
+        <Run>
+        You can double click an image to view its properties.
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+       <Run Style="{StaticResource SectionTitle}">
+        Bugs, support or suggestions.
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        You can report bugs, request support or make suggestions on my Facebook page, http://www.facebook.com/bondtech
+        </Run> 
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        Thank you.
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        I would like to say thank you first of all to Maisy, whom I would spend days not calling all in the name of programming.</Run>
+        <LineBreak />
+        <Run>
+            I'm also saying thank you to GeoDavis for being there.
+            </Run><LineBreak />
+        <Run>
+             and also to Aderele Joseph, Ogundele Olawale, and Bamidele whose laptops I used for testing. Thanks guys.
+        </Run><LineBreak />
+        <Run>
+            and most of all to you for downloading this program. :)
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run Style="{StaticResource SectionTitle}">
+        Disclaimers and stuff
+      
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        I have a feeling that I'm supposed to disclaim something, but I'm not really sure what it is.  Here's the thing: 
+            VLSR is free for personal or even commercial use. However, there is no warranties are made that VLSR will work correctly, it's not perfect (it might crash, corrupt your data, etc.) and I'm not profiting when you use it. 
+           
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+I'll try to be a good citizen about fixing bugs and helping you use it and I really do hope you like it.
+
+Note that:
+
+All trademarked names mentioned in this document and SOFTWARE are used for editorial purposes only, with no intention of infringing upon the trademarks.
+
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        And with that, thanks for reading!  I can't believe you made it this far.
+      
+        </Run>
+
+</TextBlock>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid Height="121" HorizontalAlignment="Center" Margin="2,496,-2,0" Name="gridFooter" VerticalAlignment="Bottom"  Width="608">
+            <Button Height="117" Name="btnHome" Width="118" HorizontalContentAlignment="Center" Margin="-2,2,0,2" Style="{StaticResource Cubes}" Click="btnHome_Click" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Bottom">
+                <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Home.png" />
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" RepeatBehavior="1x">
+                                <DoubleAnimation Storyboard.TargetName="gridHomeRoot" BeginTime="0:0:1"
+          From="0" To="1" Duration="0:0:2" AutoReverse="False"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Home.</TextBlock>
+                        <TextBlock>Allows you choose pictures to use as your logon screen background.</TextBlock>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <Button Height="117" HorizontalAlignment="Center" Margin="118,4,362,0" Name="btnSettings" VerticalAlignment="Bottom" Width="128" Style="{StaticResource Cubes}" Click="btnSettings_Click" Grid.RowSpan="2">
+                <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Settings.png" />
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" RepeatBehavior="1x">
+                                <DoubleAnimation Storyboard.TargetName="gridSettingsRoot" BeginTime="0:0:2"
+          From="0" To="1" Duration="0:0:1" AutoReverse="False"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Settings.</TextBlock>
+                        <TextBlock>Configure how VLSR operates.<LineBreak />You can specify when to change you logon picture.
+                        <LineBreak />Set appearance and settings of the window.</TextBlock>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <Button Height="117" HorizontalAlignment="Center" Margin="249,4,245,0" Name="btnAbout" VerticalAlignment="Bottom" Width="114" Style="{StaticResource Cubes}" Click="btnAbout_Click" Grid.RowSpan="2">
+                <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/About.png" />
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" RepeatBehavior="1x">
+                                <DoubleAnimation Storyboard.TargetName="gridAboutRoot" BeginTime="0:0:1"
+          From="0" To="1" Duration="0:0:2" AutoReverse="False"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity"  RepeatBehavior="2x">
+                                <DoubleAnimation Storyboard.TargetName="title1" BeginTime="0:0:2"
+          From="0" To="1" Duration="0:0:2" AutoReverse="True"/>
+                                <DoubleAnimation Storyboard.TargetName="title2" BeginTime="0:0:6"
+          From="0" To="1" Duration="0:0:2" AutoReverse="True"/>
+                                <DoubleAnimation Storyboard.TargetName="title3" BeginTime="0:0:10"
+          From="0" To="1" Duration="0:0:2" AutoReverse="True"/>
+                                <DoubleAnimation Storyboard.TargetName="title4" BeginTime="0:0:14"
+          From="0" To="1" Duration="0:0:2" AutoReverse="True"/>
+                                <DoubleAnimation Storyboard.TargetName="title5" BeginTime="0:0:18"
+          From="0" To="1" Duration="0:0:2" AutoReverse="True"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" RepeatBehavior="1x">
+                                <DoubleAnimation Storyboard.TargetName="imgLogoHeader" BeginTime="0:0:4"
+          From="0" To="1" Duration="0:0:2" AutoReverse="False"/>
+                                <!--<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogoHeader" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+                    <LinearDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <LinearDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0"/>
+                    <LinearDoubleKeyFrame KeyTime="00:00:02.2000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogoHeader" Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+                    <LinearDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <LinearDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0"/>
+                    <LinearDoubleKeyFrame KeyTime="00:00:02.2000000" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>-->
+                                <!--<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LogoHeader" Storyboard.TargetProperty="(UIElement.Visibility)" Duration="00:00:00.0010000">
+                            <DiscreteObjectKeyFrame KeyTime="00:00:01">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>-->
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Help and About.</TextBlock>
+                        <TextBlock>View information about VLSR and Help regarding the use of the application.</TextBlock>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <Button Height="117" HorizontalAlignment="Right" Margin="0,4,0,0" Name="btnExit" VerticalAlignment="Bottom" Width="131" Style="{StaticResource Cubes}" Click="btnExit_Click" Grid.RowSpan="2">
+                <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Exit.ico" />
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="13">Exit.</TextBlock>
+                        <TextBlock>Closes the Application after you confirm it.</TextBlock>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <Button Height="117" HorizontalAlignment="Right" Margin="0,4,132,0" Name="btnSave" Style="{StaticResource Cubes}" VerticalAlignment="Bottom" Width="115" Click="btnSave_Click" Grid.RowSpan="2">
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontFamily="Arial" FontSize="13" FontWeight="Bold">Save.</TextBlock>
+                        <TextBlock>Saves your settings and images.<LineBreak />The settings configures how VLSR operates.</TextBlock>
+                    </StackPanel>
+                </Button.ToolTip>
+                <Image Source="/Vienna%20Logon%20Screen%20Rotator;component/Images/Save.ico" />
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
